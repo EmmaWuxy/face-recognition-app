@@ -6,6 +6,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ParticlesBg from 'particles-bg';
+import SignIn from './components/SignIn/SignIn';
 
 
 class App extends React.Component {
@@ -85,6 +86,7 @@ class App extends React.Component {
       <div className="App">
         <ParticlesBg color="#FFFFFF" num={200} type="cobweb" bg={true} />
         <Navigation />
+        <SignIn />
         <Logo />
         <Rank />
         <ImageLinkForm
