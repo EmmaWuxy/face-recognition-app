@@ -8,8 +8,22 @@ function SignIn({ onRouteChange }) {
                         className="ba b--transparent ph0 mh0"
                     >
                         <legend className="f2 fw8 ph0 mh0">
-                            Sign In
+                            Register
                         </legend>
+                        <div className="mt3">
+                            <label
+                                className="db fw6 lh-copy f6"
+                                htmlFor="name"
+                            >
+                                Name
+                            </label>
+                            <input
+                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                type="text"
+                                name="name"
+                                id="name"
+                            />
+                        </div>
                         <div className="mt3">
                             <label
                                 className="db fw6 lh-copy f6"
@@ -46,14 +60,6 @@ function SignIn({ onRouteChange }) {
                             value="Sign in"
                             onClick={() => onRouteChange('home')}
                         />
-                    </div>
-                    <div className="lh-copy mt3">
-                        <p
-                            className="f6 link dim black db"
-                            onClick={() => onRouteChange('register')}
-                        >
-                            Register
-                        </p>
                     </div>
                 </form>
             </main >

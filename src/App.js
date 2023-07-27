@@ -7,6 +7,7 @@ import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ParticlesBg from 'particles-bg';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 
 
 class App extends React.Component {
@@ -30,19 +31,19 @@ class App extends React.Component {
       rightCol: width - clarifaiFace.right_col * width,
       topRow: clarifaiFace.top_row * height,
       bottomRow: height - clarifaiFace.bottom_row * height
-    };   
+    };
   }
-  
+
   displayFaceBox = (box) => {
-    this.setState({box: box});
+    this.setState({ box: box });
   }
 
   onInputChange = (event) => {
-    this.setState({input: event.target.value});
+    this.setState({ input: event.target.value });
   }
 
   onButtonSubmit = () => {
-    this.setState({imageUrl: this.state.input});
+    this.setState({ imageUrl: this.state.input });
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = 'ba7a7543d94744c28a3c51b1af4c7bf8';
     // Specify the correct user_id/app_id pairings
@@ -82,29 +83,42 @@ class App extends React.Component {
       .catch(error => console.log('error', error));
   }
 
-    onRouteChange = (route) => {
-      this.setState({route: route});
+  onRouteChange = (route) => {
+    this.setState({ route: route });
+  }
+
+  routeSwitch = (route) => {
+    switch (route) {
+      case 'signin':
+        return <SignIn onRouteChange={this.onRouteChange} />
+      case 'home':
+        return(
+          <>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit}
+            />
+            <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
+          </>
+        );
+      case 'register':
+        return <Register onRouteChange={this.onRouteChange} />
+      default:
+        throw new Error(route + ' is not a valid route');
     }
+
+  }
 
   render() {
     return (
       <div className="App">
         <ParticlesBg color="#FFFFFF" num={200} type="cobweb" bg={true} />
-        <Navigation onRouteChange={this.onRouteChange}/>
+        <Navigation onRouteChange={this.onRouteChange} />
         {
-          this.state.route == 'signin' ? <SignIn onRouteChange={this.onRouteChange}/>
-          :
-            <>
-              <Logo />
-              <Rank />
-              <ImageLinkForm
-                onInputChange={this.onInputChange}
-                onButtonSubmit={this.onButtonSubmit}
-              />
-              <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/>
-            </>
-        }
-        
+          this.routeSwitch(this.state.route)
+        }     
       </div>
     );
   }
