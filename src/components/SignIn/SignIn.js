@@ -1,6 +1,6 @@
 // import './SignIn.css'
 
-function SignIn() {
+function SignIn({ onRouteChange }) {
     return (
         <article class="br4 ba b--black-10 mv4 w-100 w-50-m w-25-l mw5 shadow-5 center">
             <main className="pa4 black-80" >
@@ -46,6 +46,7 @@ function SignIn() {
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                             type="submit"
                             value="Sign in"
+                            onClick={() => onRouteChange('home')}
                         />
                     </div>
                     <div className="lh-copy mt3">
