@@ -95,6 +95,7 @@ class App extends React.Component {
   }
 
   routeSwitch = (route) => {
+    const {imageUrl, box} = this.state;
     switch (route) {
       case 'signin':
         return <SignIn onRouteChange={this.onRouteChange} />
@@ -107,7 +108,7 @@ class App extends React.Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
             />
-            <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
+            <FaceRecognition imageUrl={imageUrl} box={box} />
           </>
         );
       case 'register':
@@ -119,12 +120,13 @@ class App extends React.Component {
   }
 
   render() {
+    const {route, isSignedIn} = this.state;
     return (
       <div className="App">
         <ParticlesBg color="#FFFFFF" num={200} type="cobweb" bg={true} />
-        <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
+        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
         {
-          this.routeSwitch(this.state.route)
+          this.routeSwitch(route)
         }     
       </div>
     );
