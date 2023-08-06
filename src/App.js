@@ -18,7 +18,14 @@ class App extends React.Component {
       imageUrl: '',
       box: {},
       route: 'signin',
-      isSignedIn: false
+      isSignedIn: false,
+      userProfile: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
     };
   }
 
@@ -37,6 +44,17 @@ class App extends React.Component {
 
   displayFaceBox = (box) => {
     this.setState({ box: box });
+  }
+
+  updateProfile = (user) => {
+    this.setState({
+      userProfile: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          entries: user.entries,
+          joined: user.joined
+      }});
   }
 
   onInputChange = (event) => {
@@ -85,22 +103,22 @@ class App extends React.Component {
   }
 
   onRouteChange = (route) => {
-    if (route === 'home'){
+    if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
-    if (route === 'signin'){
+    if (route === 'signin') {
       this.setState({ isSignedIn: false });
     }
     this.setState({ route: route });
   }
 
   routeSwitch = (route) => {
-    const {imageUrl, box} = this.state;
+    const { imageUrl, box } = this.state;
     switch (route) {
       case 'signin':
         return <SignIn onRouteChange={this.onRouteChange} />
       case 'home':
-        return(
+        return (
           <>
             <Logo />
             <Rank />
@@ -112,7 +130,7 @@ class App extends React.Component {
           </>
         );
       case 'register':
-        return <Register onRouteChange={this.onRouteChange} />
+        return <Register updateProfile={this.updateProfile} onRouteChange={this.onRouteChange} />
       default:
         throw new Error(route + ' is not a valid route');
     }
@@ -120,14 +138,14 @@ class App extends React.Component {
   }
 
   render() {
-    const {route, isSignedIn} = this.state;
+    const { route, isSignedIn } = this.state;
     return (
       <div className="App">
         <ParticlesBg color="#FFFFFF" num={200} type="cobweb" bg={true} />
-        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
+        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} />
         {
           this.routeSwitch(route)
-        }     
+        }
       </div>
     );
   }
