@@ -121,7 +121,7 @@ class App extends React.Component {
         return (
           <>
             <Logo />
-            <Rank />
+            <Rank name={this.state.userProfile.name} entries={this.state.userProfile.entries}/>
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}

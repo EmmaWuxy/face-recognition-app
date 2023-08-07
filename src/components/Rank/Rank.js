@@ -1,8 +1,8 @@
-function Rank() {
+function Rank ({name, entries}) {
     return (
         <>
             <div className="white f3">
-                {'Emma, your current rank is...'}
+                {`${name}, your current entry count is ${entries}`}
             </div>
             <div className="white f1">
                 {'#5'}
