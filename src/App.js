@@ -61,7 +61,7 @@ class App extends React.Component {
     this.setState({ input: event.target.value });
   }
 
-  onButtonSubmit = () => {
+  onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = 'ba7a7543d94744c28a3c51b1af4c7bf8';
@@ -124,7 +124,7 @@ class App extends React.Component {
             <Rank name={this.state.userProfile.name} entries={this.state.userProfile.entries}/>
             <ImageLinkForm
               onInputChange={this.onInputChange}
-              onButtonSubmit={this.onButtonSubmit}
+              onPictureSubmit={this.onPictureSubmit}
             />
             <FaceRecognition imageUrl={imageUrl} box={box} />
           </>
