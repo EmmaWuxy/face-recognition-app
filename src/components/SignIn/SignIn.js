@@ -27,8 +27,9 @@ class SignIn extends Component{
             })
         })
             .then(response => response.json())
-            .then(data => {
-                if (data === 'success'){
+            .then(user => {
+                if (user.id){
+                    this.props.updateProfile(user);
                     this.props.onRouteChange('home');
                 }
                 else{

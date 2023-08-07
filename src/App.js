@@ -98,7 +98,19 @@ class App extends React.Component {
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
       .then(response => response.json())
-      .then(result => this.displayFaceBox(this.calculateFaceLocation(result)))
+      .then(result => {
+        if (result){
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id: this.state.userProfile.id
+            })})
+            .then(response => response.json())
+            .then(count => this.setState(Object.assign(this.state.userProfile, {entries: count})))
+        }
+        this.displayFaceBox(this.calculateFaceLocation(result))
+      })
       .catch(error => console.log('error', error));
   }
 
@@ -116,7 +128,7 @@ class App extends React.Component {
     const { imageUrl, box } = this.state;
     switch (route) {
       case 'signin':
-        return <SignIn onRouteChange={this.onRouteChange} />
+        return <SignIn updateProfile={this.updateProfile} onRouteChange={this.onRouteChange} />
       case 'home':
         return (
           <>
