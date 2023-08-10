@@ -107,7 +107,7 @@ class App extends React.Component {
                 id: this.state.userProfile.id
             })})
             .then(response => response.json())
-            .then(count => this.setState(Object.assign(this.state.userProfile, {entries: count})))
+            .then(userEntries => this.setState(Object.assign(this.state.userProfile, {entries: userEntries.entries})))
         }
         this.displayFaceBox(this.calculateFaceLocation(result))
       })

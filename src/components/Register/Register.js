@@ -37,6 +37,8 @@ class Register extends Component{
                 this.props.updateProfile(data);
                 this.props.onRouteChange('home');
             })
+            // .catch(err => console.log(err))
+            // TODO: properly handle when response is a 400 error code "user not found"
     }
 
     render(){
