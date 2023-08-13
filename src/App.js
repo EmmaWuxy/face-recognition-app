@@ -18,7 +18,7 @@ class App extends React.Component {
       imageUrl: '',
       box: {},
       route: 'login',
-      isSignedIn: false,
+      isLoggedIn: false,
       userProfile: {
         id: '',
         name: '',
@@ -116,10 +116,10 @@ class App extends React.Component {
 
   onRouteChange = (route) => {
     if (route === 'home') {
-      this.setState({ isSignedIn: true });
+      this.setState({ isLoggedIn: true });
     }
     if (route === 'login') {
-      this.setState({ isSignedIn: false });
+      this.setState({ isLoggedIn: false });
     }
     this.setState({ route: route });
   }
@@ -150,11 +150,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { route, isSignedIn } = this.state;
+    const { route, isLoggedIn } = this.state;
     return (
       <div className="App">
         <ParticlesBg color="#FFFFFF" num={200} type="cobweb" bg={true} />
-        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} />
+        <Navigation onRouteChange={this.onRouteChange} isLoggedIn={isLoggedIn} />
         {
           this.routeSwitch(route)
         }

@@ -49,7 +49,7 @@ class LogIn extends Component{
                             className="ba b--transparent ph0 mh0"
                         >
                             <legend className="f2 fw8 ph0 mh0">
-                                Sign In
+                                Log In
                             </legend>
                             <div className="mt3">
                                 <label
@@ -86,7 +86,7 @@ class LogIn extends Component{
                             <input
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="submit"
-                                value="Sign in"
+                                value="Log in"
                                 onClick={this.onSubmitLogIn}
                             />
                         </div>
