@@ -1,29 +1,29 @@
 import { Component } from "react"
 
-class SignIn extends Component{
+class LogIn extends Component{
     constructor(props){
         super(props);    
         this.state = {
-            signInEmail: '',
-            signInPassword: ''
+            logInEmail: '',
+            logInPassword: ''
         };
     }
 
     onEmailChange = (event) => {
-        this.setState({signInEmail: event.target.value});
+        this.setState({logInEmail: event.target.value});
     }
 
     onPasswordChange = (event) => {
-        this.setState({signInPassword: event.target.value});
+        this.setState({logInPassword: event.target.value});
     }
 
-    onSubmitSignIn = () => {
-        fetch('http://localhost:3000/signin', {
+    onSubmitLogIn = () => {
+        fetch('http://localhost:3000/login', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.signInEmail,
-                password: this.state.signInPassword
+                email: this.state.logInEmail,
+                password: this.state.logInPassword
             })
         })
             .then(response => response.json())
@@ -87,7 +87,7 @@ class SignIn extends Component{
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="submit"
                                 value="Sign in"
-                                onClick={this.onSubmitSignIn}
+                                onClick={this.onSubmitLogIn}
                             />
                         </div>
                         <div className="lh-copy mt3">
@@ -105,4 +105,4 @@ class SignIn extends Component{
     }
 }
 
-export default SignIn;
+export default LogIn;

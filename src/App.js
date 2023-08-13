@@ -6,7 +6,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ParticlesBg from 'particles-bg';
-import SignIn from './components/SignIn/SignIn';
+import LogIn from './components/LogIn/LogIn';
 import Register from './components/Register/Register';
 
 
@@ -17,7 +17,7 @@ class App extends React.Component {
       input: '',
       imageUrl: '',
       box: {},
-      route: 'signin',
+      route: 'login',
       isSignedIn: false,
       userProfile: {
         id: '',
@@ -118,7 +118,7 @@ class App extends React.Component {
     if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
-    if (route === 'signin') {
+    if (route === 'login') {
       this.setState({ isSignedIn: false });
     }
     this.setState({ route: route });
@@ -127,8 +127,8 @@ class App extends React.Component {
   routeSwitch = (route) => {
     const { imageUrl, box } = this.state;
     switch (route) {
-      case 'signin':
-        return <SignIn updateProfile={this.updateProfile} onRouteChange={this.onRouteChange} />
+      case 'login':
+        return <LogIn updateProfile={this.updateProfile} onRouteChange={this.onRouteChange} />
       case 'home':
         return (
           <>
