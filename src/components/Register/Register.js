@@ -34,11 +34,14 @@ class Register extends Component{
         })
             .then(response => response.json())
             .then(data => {
-                this.props.updateProfile(data);
-                this.props.onRouteChange('home');
+                if (data.id){
+                    this.props.updateProfile(data);
+                    this.props.onRouteChange('home');
+                }
+                else{
+                    // TODO: display pop-up window
+                }
             })
-            // .catch(err => console.log(err))
-            // TODO: properly handle when response is a 400 error code "user not found"
     }
 
     render(){
