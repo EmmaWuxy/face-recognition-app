@@ -111,7 +111,8 @@ class App extends React.Component {
           })
             .then(response => response.json())
             .then(userEntries => this.setState(Object.assign(this.state.userProfile, { entries: userEntries.entries })))
-        }
+            .catch(console.log)
+          }
         this.displayFaceBox(this.calculateFaceLocation(result))
       })
       .catch(error => console.log('error', error));
