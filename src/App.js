@@ -9,24 +9,25 @@ import ParticlesBg from 'particles-bg';
 import LogIn from './components/LogIn/LogIn';
 import Register from './components/Register/Register';
 
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'login',
+  isLoggedIn: false,
+  userProfile: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+};
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'login',
-      isLoggedIn: false,
-      userProfile: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
-    };
+    this.state = initialState;
   }
 
   calculateFaceLocation = (data) => {
@@ -49,12 +50,13 @@ class App extends React.Component {
   updateProfile = (user) => {
     this.setState({
       userProfile: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          entries: user.entries,
-          joined: user.joined
-      }});
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        entries: user.entries,
+        joined: user.joined
+      }
+    });
   }
 
   onInputChange = (event) => {
@@ -99,15 +101,16 @@ class App extends React.Component {
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
       .then(response => response.json())
       .then(result => {
-        if (result){
+        if (result) {
           fetch('http://localhost:3000/image', {
             method: 'put',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: this.state.userProfile.id
-            })})
+              id: this.state.userProfile.id
+            })
+          })
             .then(response => response.json())
-            .then(userEntries => this.setState(Object.assign(this.state.userProfile, {entries: userEntries.entries})))
+            .then(userEntries => this.setState(Object.assign(this.state.userProfile, { entries: userEntries.entries })))
         }
         this.displayFaceBox(this.calculateFaceLocation(result))
       })
@@ -119,7 +122,7 @@ class App extends React.Component {
       this.setState({ isLoggedIn: true });
     }
     if (route === 'login') {
-      this.setState({ isLoggedIn: false });
+      this.setState(initialState);
     }
     this.setState({ route: route });
   }
@@ -133,7 +136,7 @@ class App extends React.Component {
         return (
           <>
             <Logo />
-            <Rank name={this.state.userProfile.name} entries={this.state.userProfile.entries}/>
+            <Rank name={this.state.userProfile.name} entries={this.state.userProfile.entries} />
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onPictureSubmit={this.onPictureSubmit}
