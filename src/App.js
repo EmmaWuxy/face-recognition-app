@@ -65,40 +65,13 @@ class App extends React.Component {
 
   onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    // Your PAT (Personal Access Token) can be found in the portal under Authentification
-    const PAT = 'ba7a7543d94744c28a3c51b1af4c7bf8';
-    // Specify the correct user_id/app_id pairings
-    // Since you're making inferences outside your app's scope
-    const USER_ID = 'emmawxy';
-    const APP_ID = 'face-detection';
-    const MODEL_ID = 'face-detection';
-
-    const raw = JSON.stringify({
-      "user_app_id": {
-        "user_id": USER_ID,
-        "app_id": APP_ID
-      },
-      "inputs": [
-        {
-          "data": {
-            "image": {
-              "url": this.state.input
-            }
-          }
-        }
-      ]
-    });
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Key ' + PAT
-      },
-      body: raw
-    };
-
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
+    fetch('http://localhost:3000/imageDetect', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        imageUrl: this.state.input
+      })
+    })
       .then(response => response.json())
       .then(result => {
         if (result) {
@@ -112,10 +85,12 @@ class App extends React.Component {
             .then(response => response.json())
             .then(userEntries => this.setState(Object.assign(this.state.userProfile, { entries: userEntries.entries })))
             .catch(console.log)
-          }
+        }
         this.displayFaceBox(this.calculateFaceLocation(result))
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error)
+      });
   }
 
   onRouteChange = (route) => {
