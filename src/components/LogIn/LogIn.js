@@ -18,7 +18,7 @@ class LogIn extends Component{
     }
 
     onSubmitLogIn = () => {
-        fetch('http://localhost:3000/login', {
+        fetch(process.env.REACT_APP_SERVER + '/login', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

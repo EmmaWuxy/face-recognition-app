@@ -65,7 +65,7 @@ class App extends React.Component {
 
   onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('http://localhost:3000/imageDetect', {
+    fetch(process.env.REACT_APP_SERVER + '/imageDetect', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -75,7 +75,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(result => {
         if (result) {
-          fetch('http://localhost:3000/image', {
+          fetch(process.env.REACT_APP_SERVER + '/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
